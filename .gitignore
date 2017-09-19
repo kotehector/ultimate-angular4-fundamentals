@@ -1,5 +1,7 @@
 # Project
 .idea
+.history
+.angulardoc.json
 
 # Node
 node_modules
