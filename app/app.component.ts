@@ -5,21 +5,11 @@ import { Component } from "@angular/core";
 	styleUrls: ['app.component.scss'], 
 	template: `
 		<div class="app">
-			<button
-				(click)="handleClick();">
-				Cambiar Nombre!	
+			<button	(click)="handleClick(username.value);">
+				Dar Valor
 			</button>
-			<!-- one-way databinding -->
-			<input 
-				type="text" 
-				[ngModel]="name"
-				(ngModelChange)="handleChange($event);">
-			
-			<!-- two-way databinding sintax -->
-			<input 
-			type="text" 
-			[(ngModel)]="name">
-
+			<!-- Sintax variables #ref -->
+			<input type="text" #username>
 			<div>{{ name }}</div>
 		</div>
 	`
@@ -27,16 +17,13 @@ import { Component } from "@angular/core";
 export class AppComponent {
 	name: string = 'Hector';
 	
-	handleClick() {
-		this.name = 'HMH';
-	}
-	handleChange(value: string) {
-		this.name = value;
+	handleClick(value: string) {
+		console.log(value);
 	}
 }
 
 /**
- * 2-way-databinding lo utilizamos cuando algo cambia y emitimos un evento
- * para tratar el dato.
- * 1-way-databinding lo utilizamos para hacer cambios en componentes locales.
+ * Las variables #ref del Template nos permiten crear una referencia
+ * a un Nodo en particular del DOM que es accesible en cualquier 
+ * parte del Template. Esto es muy práctico.
  */
