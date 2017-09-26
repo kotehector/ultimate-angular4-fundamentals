@@ -5,32 +5,42 @@ import { Component } from "@angular/core";
 	styleUrls: ['app.component.scss'], 
 	template: `
 		<div class="app">
-			<h1 [innerHtml]="title"></h1>
-			<!-- element.innerHtml = 'Hector' --> 
-			<img [src]="logo"> 
-			<!-- element.src = 'https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/copyleft.svg' -->
-			
-			<input type="text" [value]="name">
+		<!-- (evento)="function($event);" -->
+		<button
+			(click)="handleClick();">
+			Cambiar Nombre!	
+		</button>
+			<input 
+				type="text" 
+				[value]="name"
+				(input)="handleInput($event);"
+				(blur)="handleBlur($event);">
 			<div>{{ name }}</div>
-			<!-- one-data-flow. Los cambios en el input NO se reflejan en el DIV -->
 		</div>
 	`
 })
 export class AppComponent {
-	title: string;
 	name: string = 'Hector';
-	logo: string = 'https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/copyleft.svg';
 	
-	constructor() {
-		this.title = 'Ultimate Angular Fundamentals'; 
+	handleClick() {
+		this.name = 'HMH';
+	}
+	handleInput(event: any) {
+		this.name = event.target.value;
+	}
+	handleBlur(event: any) {
+		this.name = event.target.value;
+		console.log(event);		
 	}
 }
 
 /**
- * El binding de propiedades es la unión de propiedades de la Clase con
+ * El binding de eventos es la unión de funciones de la Clase con
  * el template.
- * Para entender lo que hacen los {{ }} vamos a utilizar 'sugar sintax'
- * que es la manera de hacer algo que funcione bien y se vea limpio, sencillo.
- * Utilizamos [propiedad] para hacer el binding de las propiedades en lugar de
- * {{ }}, hacemos esto para usar one-way databinding
+ * Utiliza una sintaxis diferente.
+ * Utilizamos (evento) para hacer el binding de los funciones para manejar
+ * el evento que necesitamos.
+ * La función SIEMPRE puede recibir el $event como parámetro para trabajar
+ * con el y acceder a todas las propiedades del elemento.
+ * Los eventos son el ejemplo claro de 2-data-binding
  */
