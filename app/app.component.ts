@@ -5,16 +5,21 @@ import { Component } from "@angular/core";
 	styleUrls: ['app.component.scss'], 
 	template: `
 		<div class="app">
-		<!-- (evento)="function($event);" -->
-		<button
-			(click)="handleClick();">
-			Cambiar Nombre!	
-		</button>
+			<button
+				(click)="handleClick();">
+				Cambiar Nombre!	
+			</button>
+			<!-- one-way databinding -->
 			<input 
 				type="text" 
-				[value]="name"
-				(input)="handleInput($event);"
-				(blur)="handleBlur($event);">
+				[ngModel]="name"
+				(ngModelChange)="handleChange($event);">
+			
+			<!-- two-way databinding sintax -->
+			<input 
+			type="text" 
+			[(ngModel)]="name">
+
 			<div>{{ name }}</div>
 		</div>
 	`
@@ -25,22 +30,13 @@ export class AppComponent {
 	handleClick() {
 		this.name = 'HMH';
 	}
-	handleInput(event: any) {
-		this.name = event.target.value;
-	}
-	handleBlur(event: any) {
-		this.name = event.target.value;
-		console.log(event);		
+	handleChange(value: string) {
+		this.name = value;
 	}
 }
 
 /**
- * El binding de eventos es la unión de funciones de la Clase con
- * el template.
- * Utiliza una sintaxis diferente.
- * Utilizamos (evento) para hacer el binding de los funciones para manejar
- * el evento que necesitamos.
- * La función SIEMPRE puede recibir el $event como parámetro para trabajar
- * con el y acceder a todas las propiedades del elemento.
- * Los eventos son el ejemplo claro de 2-data-binding
+ * 2-way-databinding lo utilizamos cuando algo cambia y emitimos un evento
+ * para tratar el dato.
+ * 1-way-databinding lo utilizamos para hacer cambios en componentes locales.
  */
