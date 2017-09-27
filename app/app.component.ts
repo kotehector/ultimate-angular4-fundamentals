@@ -1,11 +1,5 @@
 import { Component } from "@angular/core";
 
-/**
- * Interface para definir el tipo de Dato Personalizado
- * con las restricciones de Datos para TS
- * 
- * @interface Passenger
- */
 interface Passenger {
 	id: number,
 	fullname: string,
@@ -17,25 +11,29 @@ interface Passenger {
   styleUrls: ["app.component.scss"],
   template: `
 		<div class="app">
-			
-		<h3>Pasajeros (explicación)</h3>
-		<ul>
-			<!-- Explicación del ngFor -->
-			<template ngFor let-passenger let-i="index" [ngForOf]="passengers">
-				<li>
-					{{ i }}: {{ passenger.fullname }}
-				</li>
-			</template>
-		</ul>
 
 			<h3>Pasajeros (sugar syntax)</h3>
 			<ul>
-				<!-- sintax para recorrer un Array -->
-				<!-- Angular no da un variable que se llama 'index' -->
 				<li *ngFor="let passenger of passengers; let i = index;">
+					<!-- sintax para añadir una Clase -->
+					<span 
+						class="status"
+						[class.checked-in]="passenger.checkedIn"></span>
 					{{ i }}: {{ passenger.fullname }}
 				</li>
 			</ul>
+
+			<ul>
+			<li *ngFor="let passenger of passengers; let i = index;">
+				<!-- sintax para añadir varias Clases a través de un Obj -->
+				<span 
+					class="status"
+					[ngClass]="{ 
+						'checked-in' : passenger.checkedIn,
+						'checked-out': !passenger.checkedIn }"></span>
+				{{ i }}: {{ passenger.fullname }}
+			</li>
+		</ul>
 			
 		</div>
 	`
@@ -65,10 +63,8 @@ export class AppComponent {
 }
 
 /**
- * *ngFor es una DIRECTIVA que nos permite de una manera muy fácil
- * recorrer un array.
- * Vamos a usar una Interface para crear el tipo de Dato personalizado
- * en TS con diferentes restricciones.
+ * ngClass nos permite añadir clases evaluando una expresión
+ * 
  * 
  *  
  */
