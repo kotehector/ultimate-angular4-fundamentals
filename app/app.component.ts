@@ -3,7 +3,9 @@ import { Component } from "@angular/core";
 interface Passenger {
 	id: number,
 	fullname: string,
-	checkedIn: boolean
+	checkedIn: boolean,
+	checkInDate: number
+	// El operador ? hace que el Dato sea opcional. 
 }
 
 @Component({
@@ -19,49 +21,10 @@ interface Passenger {
 						class="status"
 						[class.checked-in]="passenger.checkedIn"></span>
 					{{ i }}: {{ passenger.fullname }}
-				</li>
-			</ul>
-
-			<h3>Pasajeros</h3>
-			<ul>
-				<li *ngFor="let passenger of passengers; let i = index;">
-					<span 
-						class="status"
-						[ngClass]="{ 
-							'checked-in' : passenger.checkedIn,
-							'checked-out': !passenger.checkedIn }"></span>
-					{{ i }}: {{ passenger.fullname }}
-				</li>
-			</ul>
-
-			<h3>Pasajeros (style)</h3>
-			<ul>
-				<li *ngFor="let passenger of passengers; let i = index;">
-					<!-- sintax para añadir Estilos dinámicamente -->
-					<span 
-						class="status"
-						[style.backgroundColor]="(passenger.checkedIn ? 'green' : 'red') "></span>
-					{{ i }}: {{ passenger.fullname }}
-				</li>
-			</ul>
-
-			<h3>Pasajeros (ngStyle)</h3>
-			<ul>
-				<li *ngFor="let passenger of passengers; let i = index;">
-					<!-- sintax para añadir Estilos dinámicamente -->
-					<span 
-						class="status"
-						[ngStyle]="{
-							backgroundColor: (passenger.checkedIn ? 'green' : 'red'),
-							color: (passenger.checkedIn ? 'yellowgreen' : 'orange')
-						} "></span>
-					<span
-						[ngStyle]="{
-							backgroundColor: (passenger.checkedIn ? 'green' : 'red'),
-							color: (passenger.checkedIn ? 'yellowgreen' : 'orange')
-						}">	
-					{{ i }}: {{ passenger.fullname }}
-					</span>
+					<p>{{ passenger | json }}</p>
+					<div class="date">
+						Check in date: {{ passenger.checkInDate ? (passenger.checkInDate | date: 'y MMM' | uppercase) : 'Not checked in...' }}
+					</div>
 				</li>
 			</ul>
 			
@@ -72,31 +35,40 @@ export class AppComponent {
   passengers: Passenger[] = [{
 		id: 1,
 		fullname: 'Hector',
-		checkedIn: true
+		checkedIn: true,
+		checkInDate: 1490742000000
 	},{
 		id: 2,
 		fullname: 'Raquel',
-		checkedIn: true
+		checkedIn: true,
+		checkInDate: 1890742000000
 	},{
 		id: 3,
 		fullname: 'Maria',
-		checkedIn: false
+		checkedIn: false,
+		checkInDate: null
 	},{
 		id: 4,
 		fullname: 'Juan',
-		checkedIn: false
+		checkedIn: false,
+		checkInDate: null
 	},{
 		id: 5,
 		fullname: 'Peper',
-		checkedIn: true
+		checkedIn: true,
+		checkInDate: 1290742000000
 	}];
 }
 
 /**
- * [style.propiedad] = "expr" nos permite acceder a las propiedades de cada Elemento
- * igual que en JS y evaluar una Condición para modificarla
- * dinamicamente.
- * [ngStyle] = { propiedad : "expr" } nos permite acceder a las propiedades de cada Elemento
- * igual que en JS pero esta vez como un Objeto y evaluar varias 
- * Condiciones para modificarlas dinámicamente.
+ * Funciones que devuelven algo nuevo.
+ * 
+ * function upercase(string) {
+ *	return string.toUpperCase();
+ * }
+ *
+ * var name = upercase('hector');
+ * console.log(name); // HECTOR
  */
+
+
