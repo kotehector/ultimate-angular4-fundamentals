@@ -1,11 +1,16 @@
 import { Component } from "@angular/core";
 
+interface child {
+	name: string,
+	age: number
+}
 interface Passenger {
 	id: number,
 	fullname: string,
 	checkedIn: boolean,
-	checkInDate: number
+	checkInDate: number | null,
 	// El operador ? hace que el Dato sea opcional. 
+	children: child[] | null
 }
 
 @Component({
@@ -25,6 +30,10 @@ interface Passenger {
 					<div class="date">
 						Check in date: {{ passenger.checkInDate ? (passenger.checkInDate | date: 'y MMM' | uppercase) : 'Not checked in...' }}
 					</div>
+					<div class="children">
+						<!-- El operador ? hace que el Dato sea opcional. -->
+						Children: {{ passenger.children?.length || 0 }}
+					</div>
 				</li>
 			</ul>
 			
@@ -36,39 +45,38 @@ export class AppComponent {
 		id: 1,
 		fullname: 'Hector',
 		checkedIn: true,
-		checkInDate: 1490742000000
+		checkInDate: 1490742000000,
+		children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
 	},{
 		id: 2,
 		fullname: 'Raquel',
 		checkedIn: true,
-		checkInDate: 1890742000000
+		checkInDate: 1890742000000,
+		children: null
 	},{
 		id: 3,
 		fullname: 'Maria',
 		checkedIn: false,
-		checkInDate: null
+		checkInDate: null,
+		children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
 	},{
 		id: 4,
 		fullname: 'Juan',
 		checkedIn: false,
-		checkInDate: null
+		checkInDate: null,
+		children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
 	},{
 		id: 5,
 		fullname: 'Peper',
 		checkedIn: true,
-		checkInDate: 1290742000000
+		checkInDate: 1290742000000,
+		children: null
 	}];
 }
 
 /**
- * Funciones que devuelven algo nuevo.
- * 
- * function upercase(string) {
- *	return string.toUpperCase();
- * }
- *
- * var name = upercase('hector');
- * console.log(name); // HECTOR
+ * El operador ? nos permite chequear una variable y devuelve
+ * null si no existe.
  */
 
 
