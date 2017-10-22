@@ -1,4 +1,3 @@
-/** Importamos el OnInit */
 import { Component, OnInit } from "@angular/core";
 
 import { Passenger } from "../models/passenger.interface";
@@ -8,7 +7,10 @@ import { Passenger } from "../models/passenger.interface";
 	styleUrls: ['passenger-dashboard.component.scss'],
 	template: `
 		<div>
-			<passenger-count></passenger-count>
+			<!-- Pasar Propiedades a un 'stateless component' -->
+			<passenger-count
+				[items]="passengers">
+			</passenger-count>
 			<passenger-detail></passenger-detail>
 			<h3>Passenger Dashboard</h3>
 			<ul>
@@ -21,7 +23,6 @@ import { Passenger } from "../models/passenger.interface";
 						Check in date: {{ passenger.checkInDate ? (passenger.checkInDate | date: 'y MMM' | uppercase) : 'Not checked in...' }}
 					</div>
 					<div class="children">
-						<!-- El operador ? hace que el Dato sea opcional. -->
 						Children: {{ passenger.children?.length || 0 }}
 					</div>
 				</li>
@@ -29,7 +30,6 @@ import { Passenger } from "../models/passenger.interface";
 		</div>
 	`
 })
-// Lo implementamos en el Componente
 export class PassengerDashboardComponent implements OnInit {
 	passengers: Passenger[];
 	constructor(){}
