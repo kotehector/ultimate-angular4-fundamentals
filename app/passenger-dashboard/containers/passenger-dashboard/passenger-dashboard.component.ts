@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+/** Importamos el OnInit */
+import { Component, OnInit } from "@angular/core";
 
 import { Passenger } from "../models/passenger.interface";
 
@@ -26,36 +27,49 @@ import { Passenger } from "../models/passenger.interface";
 		</div>
 	`
 })
-export class PassengerDashboardComponent {
-	passengers: Passenger[] = [{
-		id: 1,
-		fullname: 'Hector',
-		checkedIn: true,
-		checkInDate: 1490742000000,
-		children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
-	},{
-		id: 2,
-		fullname: 'Raquel',
-		checkedIn: true,
-		checkInDate: 1890742000000,
-		children: null
-	},{
-		id: 3,
-		fullname: 'Maria',
-		checkedIn: false,
-		checkInDate: null,
-		children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
-	},{
-		id: 4,
-		fullname: 'Juan',
-		checkedIn: false,
-		checkInDate: null,
-		children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
-	},{
-		id: 5,
-		fullname: 'Peper',
-		checkedIn: true,
-		checkInDate: 1290742000000,
-		children: null
-	}];
+// Lo implementamos en el Componente
+export class PassengerDashboardComponent implements OnInit {
+	passengers: Passenger[];
+	constructor(){}
+	
+	/**
+	 * Creamos el método ngOnInit que será el que inicialice las
+	 * variables del Componente
+	 * 
+	 * @memberof PassengerDashboardComponent
+	 */
+	ngOnInit(){
+		console.log('ngOnInit');
+		this.passengers = [{
+			id: 1,
+			fullname: 'Hector',
+			checkedIn: true,
+			checkInDate: 1490742000000,
+			children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
+		},{
+			id: 2,
+			fullname: 'Raquel',
+			checkedIn: true,
+			checkInDate: 1890742000000,
+			children: null
+		},{
+			id: 3,
+			fullname: 'Maria',
+			checkedIn: false,
+			checkInDate: null,
+			children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
+		},{
+			id: 4,
+			fullname: 'Juan',
+			checkedIn: false,
+			checkInDate: null,
+			children: [{ name: 'Ted', age: 12},{ name: 'Chloe', age: 7}]
+		},{
+			id: 5,
+			fullname: 'Peper',
+			checkedIn: true,
+			checkInDate: 1290742000000,
+			children: null
+		}];
+	}
 }
