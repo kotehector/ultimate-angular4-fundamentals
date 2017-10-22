@@ -8,6 +8,7 @@ interface Passenger {
 	id: number,
 	fullname: string,
 	checkedIn: boolean,
+	// Con | null podemos hacerlo Opcional también.
 	checkInDate: number | null,
 	// El operador ? hace que el Dato sea opcional. 
 	children: child[] | null
