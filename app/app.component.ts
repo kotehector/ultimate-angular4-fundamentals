@@ -14,13 +14,13 @@ import { Component } from "@angular/core";
 			<!-- comportamiento del '*' internamente de Angular -->
 			<template [ngIf]="name.length > 2">
 				<div>
-					Buscando ... {{ name }}</div>
+					Buscando ... {{ name }}
 				</div>
 			</template>
 
 			<!-- usamos el '*' para simplificar (sugar sintax) -->
 			<div *ngIf="name.length > 2">
-				Buscando ... {{ name }}</div>
+				Buscando ... {{ name }}
 			</div>
 			
 		</div>
